@@ -1,5 +1,10 @@
+# get instance from datasets in instance folder
 def get_instance():
 
-    stations_dict = {1:{}}
-    # code for getting instance from datasets
-    return instance
+    aircraft_dict = {}
+
+    stations_dict = {
+            1: {}
+        }
+    
+    return [aircraft_dict, stations_dict]
