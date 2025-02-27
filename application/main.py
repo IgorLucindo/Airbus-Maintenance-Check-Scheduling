@@ -8,5 +8,6 @@ def main():
 
     run_model(instance)
 
+
 if __name__ == "__main__":
     main()
