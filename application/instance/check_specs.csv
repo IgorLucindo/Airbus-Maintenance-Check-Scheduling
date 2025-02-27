@@ -1,0 +1,7 @@
+FLEET,Check,Days,Remark
+B737NG,AC (A001-A024),120,A-check
+B737 MAX,AC (A002-A024),60,A-check
+B737 MAX,AC (A001),120,"1st A-check on MAX are 120 days, then 60 days thereafter"
+AIRBUS,AC (A01-A12),100,A-check
+AIRBUS,P (C01-C06),730,Phase-check
+AIRBUS,P (C07-C10),1216,Phase-check
