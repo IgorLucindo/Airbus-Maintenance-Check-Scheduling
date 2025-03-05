@@ -7,7 +7,7 @@ def main():
     instance = get_instance()
 
     # get optimal scheduling for airbusses
-    schedule = solve_aircraft_scheduling(instance)
+    # schedule = solve_aircraft_scheduling(instance)
 
 
 if __name__ == "__main__":
