@@ -16,6 +16,7 @@ def solve_aircraft_scheduling(instance):
 
     # add variables
     x = model.addVars(A, C, S, T, vtype=GRB.BINARY, name="x")
+    y = model.addVars(A, S, T, vtype=GRB.BINARY, name="y")
 
     # set objective function
     obj_fn = gp.quicksum(x[i, j, s, t] for i, j, s, t in product(A, C, S, T))
@@ -23,14 +24,17 @@ def solve_aircraft_scheduling(instance):
 
     # add constraints
     for i, j, s, t in product(A, C, S, T):
-        if not is_schedulable(i, j, s, t):
+        if not is_schedulable(i, j, s, t, sta_specs):
             x[i, j, s, t].ub = 0
 
-    model.addConstrs((gp.quicksum() <= 1 for ), name="c1")
+    model.addConstrs((gp.quicksum(x[i, j, s, t] for s in S) <= 1 for i, j, t in product(A, C, T)), name="c1")
+
+    model.addConstrs((x[i, j, s, t] + y[i, s, t] <= 1 for i, j, t in product(A, S, T)), name="c2")
+    model.addConstrs((x[i, j, s, t] <= y[i, s, t] for i, j, t in product(A, S, T)), name="c2")
         
 
     # solve
     model.optimize()
 
     # return optimal solution
-    return [[[[x[i, j, s, t].X for i in A] for j in C] for s in S] for t in T]
+    return [x[i, j, s, t].X for i, j, s, t in product(A, C, S, T)]
