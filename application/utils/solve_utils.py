@@ -4,8 +4,8 @@ from itertools import product
 from utils.check_schedulability_utils import *
 
 
-# run model for schedulling airbusses and return output
-def run_model(instance):
+# model for solving schedulling airbusses and return output
+def solve_aircraft_scheduling(instance):
     A, C, S, T = instance
 
     # create model
