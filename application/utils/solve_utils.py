@@ -25,6 +25,8 @@ def solve_aircraft_scheduling(instance):
     for i, j, s, t in product(A, C, S, T):
         if not is_schedulable(i, j, s, t):
             x[i, j, s, t].ub = 0
+
+    model.addConstrs((gp.quicksum() <= 1 for ), name="c1")
         
 
     # solve
