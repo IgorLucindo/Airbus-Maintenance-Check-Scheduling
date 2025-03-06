@@ -1,11 +1,16 @@
 # get instance from datasets in instance folder
 def get_instance():
-    # get airbus set from aircraft_dictionary_checks_count dictionary
-    A = range(len(get_airbus_set()))
+    # get dicts
+    sta_specs = get_sta_specs_dict()
+
+    # get sets
+    A = range(len(get_airbus_set())) # array
+    C = get_check_set() # dict
     
-    return [A, C, S, T]
+    return [A, C, S, T, sta_specs]
 
 
+# get sta_spces dictionary
 def get_sta_specs_dict():
     return {
         'STA_1': {'AC': 1, 'P': 1, 'STATION_CAP': 1},
@@ -31,3 +36,11 @@ def get_airbus_set():
         data = file.read()
 
     return eval(data)
+
+
+# get check dictionary
+def get_check_set():
+    return {
+        'A': [0],
+        'Phase': range(10)
+    }

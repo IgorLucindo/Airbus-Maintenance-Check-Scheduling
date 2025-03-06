@@ -6,7 +6,7 @@ from utils.check_schedulability_utils import *
 
 # model for solving schedulling airbusses and return output
 def solve_aircraft_scheduling(instance):
-    A, C, S, T = instance
+    A, C, S, T, sta_specs = instance
 
     # create model
     model = gp.Model("airbus schedulling")
@@ -30,7 +30,7 @@ def solve_aircraft_scheduling(instance):
     model.addConstrs((gp.quicksum(x[i, j, s, t] for s in S) <= 1 for i, j, t in product(A, C, T)), name="c1")
 
     model.addConstrs((x[i, 'AC', s, t] + y[i, s, t] <= 1 for i, s, t in product(A, S, T)), name="c2")
-    model.addConstrs((x[i, j, s, t] <= y[i, s, t] for i, s, t in product(A, S, T)), name="c2")
+    model.addConstrs((x[i, j, s, t] <= y[i, s, t] for i, j, s, t in product(A, CC, S, T)), name="c3")
         
 
     # solve
