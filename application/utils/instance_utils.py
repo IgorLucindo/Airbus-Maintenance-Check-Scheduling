@@ -1,10 +1,15 @@
 # get instance from datasets in instance folder
 def get_instance():
+    # folder paths
+    array_folder_path = "instances/arrays/"
+    dict_folder_path = "instances/dictionaries/"
+
     # get dicts
     sta_specs = get_sta_specs_dict()
+    airbusses_array = get_array_instance(array_folder_path + "airbusses.txt")
 
     # get sets
-    A = range(len(get_airbus_set())) # array
+    A = range(len(airbusses_array)) # array
     C = get_check_set() # dict
     
     return [A, C, S, T, sta_specs]
@@ -28,10 +33,16 @@ def get_sta_specs_dict():
     }
 
 
-# get aircraft_dictionary_checks_count dictionary
-def get_airbus_set():
-    file_path = "instances/dictionaries/aircraft_dictionary_checks_count.txt"
+# get an array in a .txt file
+def get_array_instance(file_path):
+    with open(file_path, "r") as file:
+        data = file.read()
 
+    return eval(data)
+
+
+# get a dictionary in a .txt file
+def get_dictionary_instance(file_path):
     with open(file_path, "r") as file:
         data = file.read()
 
@@ -40,7 +51,9 @@ def get_airbus_set():
 
 # get check dictionary
 def get_check_set():
+    total_C_checks = 10
+
     return {
         'A': [0],
-        'Phase': range(10)
+        'Phase': range(total_C_checks)
     }
